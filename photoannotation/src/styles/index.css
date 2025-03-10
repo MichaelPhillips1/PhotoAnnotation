@@ -109,9 +109,9 @@ code {
 }
 
 #DisplayedImage{
+  width: 95%;
   max-height: 95%;
-  width: 95% !important;
-  border: 2px solid rgb(27, 27, 27);
+  border: 2px solid red;
 }
 
 #LabelBarDiv{
