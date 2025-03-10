@@ -1,0 +1,167 @@
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+ font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#HeaderBarDiv{
+  width: 100vw;
+  height: 7.5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: teal;
+}
+
+#HeaderTitle{
+  font-size: 2vh;
+}
+#HeaderSubtitle{
+  font-size: 1vh;
+}
+
+#BodyContainerDiv{
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+}
+
+#ImageBarDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(27, 27, 27);
+  width: calc(20vw - 6px);
+  height: calc(92.5vh - 6px);
+  border: 3px solid teal;
+}
+
+#ImportImagesButton{
+  width: 90%;
+  height: 7.5%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(50, 50, 50);
+  border-radius: 7px;
+  color: white;
+}
+
+#ImportImagesLabel{
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  font-size: 1.5vw;
+}
+
+#ImageBarList{
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  height: calc(100% - (7.5% + 50px));
+  margin-top: 10px;
+  background-color: rgb(50, 50, 50);
+  
+}::-webkit-scrollbar{
+  display: none;
+}
+
+.ImageBarItem{
+  display: flex;
+  width: 90%;
+  height: fit-content;
+  margin-top: 10px;
+  border-radius: 5px;
+  background-color: rgb(70, 70, 70);
+  color: white;
+  line-break: anywhere;
+}
+
+.ImageBarItemIcon{
+  border-radius: 5px;
+  width: 20%;
+  margin: 5px;
+  border: 1px solid rgb(27, 27, 27);
+}
+
+#ImageDisplayDiv{
+  display: flex;
+  width: 60vw;
+  height: calc(92.5vh - 6px);
+  justify-content: center;
+  align-items: center;
+  border-bottom: 3px solid teal;
+  border-top: 3px solid teal;
+  background-color: rgb(27, 27, 27);
+}
+
+#DisplayedImage{
+  max-height: 95%;
+  width: 95% !important;
+  border: 2px solid rgb(27, 27, 27);
+}
+
+#LabelBarDiv{
+  background-color: rgb(27, 27, 27);
+  height: calc(92.5vh - 6px);
+  width: calc(20vw - 6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: scroll;
+  border: 3px solid teal;
+  color: white;
+}
+
+#LabelBarContents{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+  width: 90%;
+}
+
+#BoundingCoordinatesTitle{
+  font-size: 2vw;
+  text-align: center;
+  font-weight: bold;
+}
+
+.CoordinateLabel{
+  color: white;
+  margin: 2.5%;
+  text-align: center;
+  font-size: 1vw;
+}
+
+.CoordinateInput{
+  background-color: rgb(50,50,50);
+  border-radius: 5px;
+  font-size: 1vw;
+  text-align: center;
+  color: white;
+  width: 40%;
+}
+
+#DownloadXMLButton{
+  width: 40%;
+  height: 5%;
+  margin: 5%;
+  background-color: rgb(50, 50, 50);
+  color: white;
+  text-align: center;
+}
