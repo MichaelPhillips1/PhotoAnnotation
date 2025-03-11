@@ -8,6 +8,7 @@ function ImageDisplay() {
     const imagePath = useSelector(state => state.imagePath);
     const imageDimensions = useSelector(state => state.imageDimensions);
     const boundingBoxes = useSelector(state => state.boundingBoxes);
+    const bboxIdCounter = useSelector(state => state.bboxIdCounter);
     const [coords, setCoords] = useState([])
 
     useEffect(() => {
@@ -79,10 +80,7 @@ function ImageDisplay() {
             ctx.font = "20px Arial";
             boundingBoxes.forEach(element => {
                 const metrics = ctx.measureText(element[2]);
-                const textWidth = metrics.width;
-                // if (Math.abs(element[1][0] - element[0][0]) < textWidth || Math.abs(element[0][1] - element[1][1]) < 25) {
-                //     ctx.fillText(element[2], ((element[0][0] + element[1][0]) / 2) - (textWidth / 2), (element[0][1] - (textOffset)));
-                // }                
+                const textWidth = metrics.width;           
                 ctx.strokeRect(element[0][0], element[0][1], element[1][0] - element[0][0], element[1][1] - element[0][1]);
                 ctx.strokeText(element[2], ((element[0][0] + element[1][0]) / 2) - (textWidth / 2), ((element[0][1] + element[1][1]) / 2) + ((10 + textOffset) / 2));
                 ctx.fillText(element[2], ((element[0][0] + element[1][0]) / 2) - (textWidth / 2), ((element[0][1] + element[1][1]) / 2) + ((10 + textOffset) / 2));
@@ -102,8 +100,8 @@ function ImageDisplay() {
             setDrawMode(false);
             const start = coords[0]; 
             const end = [x, y];             
-            setCoords([start, end, boundingBoxes.length]);
-            store.dispatch({ type: 'add/boundingBoxes', payload: [start, end, boundingBoxes.length] })
+            setCoords([start, end, bboxIdCounter]);
+            store.dispatch({ type: 'add/boundingBoxes', payload: [start, end, bboxIdCounter] })
         } else if (coords.length > 1) {
             setCoords([[x, y]]);
             setDrawMode(true);

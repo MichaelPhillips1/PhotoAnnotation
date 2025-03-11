@@ -11,7 +11,7 @@ function LabelBarItem(props) {
         <p className="LabelBarCoordText">({parseFloat(props.boundingBox[0][0].toFixed(2))}, {parseFloat(props.boundingBox[0][1].toFixed(2))})</p>
         <p className="LabelBarCoordText">(X2, Y2) Coordinates:</p>
         <p className="LabelBarCoordText">({parseFloat(props.boundingBox[1][0].toFixed(2))}, {parseFloat(props.boundingBox[1][1].toFixed(2))})</p>
-        <button className="DeleteEntryButton" onClick={() => handleDelete(props.boundingBox[2])}><DeleteIcon className="DeleteEntryIcon" /> <p className="DeleteEntryText">DeleteEntry #{props.boundingBox[2]}</p></button>
+        <button className="DeleteEntryButton" onClick={() => handleDelete(props.boundingBox[2])}><DeleteIcon className="DeleteEntryIcon" /> <p className="DeleteEntryText">Delete Entry #{props.boundingBox[2]}</p></button>
     </div>
 }
 
