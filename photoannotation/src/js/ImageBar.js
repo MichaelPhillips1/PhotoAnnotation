@@ -11,6 +11,10 @@ function ImageBar() {
         fileInputRef.current.click();
     }
     const handleFileChanges = (e) => {
+        store.dispatch({ type: 'set/imagePath', payload: null })
+        store.dispatch({ type: 'set/imageDimensions', payload: null })
+        store.dispatch({ type: 'set/imageName', payload: null })
+        store.dispatch({type: 'clear/boundingBoxes'})
         let ImageBarItemHolder = [];
         Array.from(e.target.files).forEach((element, index) => {
             let imageUrl = URL.createObjectURL(element);

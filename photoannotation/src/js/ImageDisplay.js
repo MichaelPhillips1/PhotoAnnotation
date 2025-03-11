@@ -73,15 +73,19 @@ function ImageDisplay() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
             ctx.strokeStyle = "red";
-            ctx.fillStyle = "red";
+            ctx.fillStyle = "white";
             ctx.lineWidth = 2;
-            let textHeight = 16;
-            ctx.font = "16px Arial";
+            let textOffset = 5;
+            ctx.font = "20px Arial";
             boundingBoxes.forEach(element => {
                 const metrics = ctx.measureText(element[2]);
                 const textWidth = metrics.width;
-                ctx.fillText(element[2], ((element[0][0] + element[1][0]) / 2) - (textWidth / 2), (element[0][1] - (textHeight)));
+                // if (Math.abs(element[1][0] - element[0][0]) < textWidth || Math.abs(element[0][1] - element[1][1]) < 25) {
+                //     ctx.fillText(element[2], ((element[0][0] + element[1][0]) / 2) - (textWidth / 2), (element[0][1] - (textOffset)));
+                // }                
                 ctx.strokeRect(element[0][0], element[0][1], element[1][0] - element[0][0], element[1][1] - element[0][1]);
+                ctx.strokeText(element[2], ((element[0][0] + element[1][0]) / 2) - (textWidth / 2), ((element[0][1] + element[1][1]) / 2) + ((10 + textOffset) / 2));
+                ctx.fillText(element[2], ((element[0][0] + element[1][0]) / 2) - (textWidth / 2), ((element[0][1] + element[1][1]) / 2) + ((10 + textOffset) / 2));
             });
         }
     }, [boundingBoxes])

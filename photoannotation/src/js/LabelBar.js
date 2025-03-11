@@ -5,14 +5,19 @@ import LabelBarItem from './LabelBarItem';
 
 function LabelBar() {
 
-    const [label, setLabel] = useState("default");
-    const [depth, setDepth] = useState("3");
+    const [label, setLabel] = useState("");
+    const [depth, setDepth] = useState("");
     const [labelItems, setLabelItems] = useState([])
     const boundingBoxes = useSelector(state => state.boundingBoxes)
     const imageDimensions = useSelector(state => state.imageDimensions)
     const imageName = useSelector(state => state.imageName)
 
     function downloadImageXML() {
+
+        if (label.trim() === "" || isNaN(Number(depth))) {
+            return
+        }
+
         let xmltext =
         `
         <annotation>
@@ -21,7 +26,7 @@ function LabelBar() {
                 <height>${imageDimensions[0]}</height>
                 <depth>${depth}</depth>
             </size>
-            <name>${label}</name>
+            <name>${label.trim()}</name>
         `
 
         boundingBoxes.forEach(element => {
@@ -63,7 +68,7 @@ function LabelBar() {
     return <div id="LabelBarDiv">
         {boundingBoxes.length >= 1 ?
             <div id="LabelBarContents">
-                <p id="ActiveLabelHeader">Active Labels</p>
+                <p id="ActiveLabelBoundsHeader">Active Label Bounds</p>
                 <div id="LabelBarTable">
                     {labelItems}
                 </div>
