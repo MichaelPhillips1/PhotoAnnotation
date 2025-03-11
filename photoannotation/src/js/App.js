@@ -14,9 +14,9 @@ function App() {
     return <>
         <HeaderBar />
         <div id='BodyContainerDiv'>
-            <ImageBar setImagePath={setImagePath} setCoords={setCoords} setImageName={setImageName} />
-            <ImageDisplay imagePath={imagePath} setCoords={setCoords} coords={coords} setDimensions={setDimensions} dimensions={dimensions} />
-            <LabelBar setCoords={setCoords} coords={coords} dimensions={dimensions} imageName={imageName} />
+            <ImageBar />
+            <ImageDisplay />
+            <LabelBar />
         </div>
     </>
 }

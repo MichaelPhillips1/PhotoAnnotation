@@ -1,32 +1,44 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import store from './store';
+import { useSelector } from 'react-redux';
+import LabelBarItem from './LabelBarItem';
 
-function LabelBar(props) {
+function LabelBar() {
 
     const [label, setLabel] = useState("default");
     const [depth, setDepth] = useState("3");
+    const [labelItems, setLabelItems] = useState([])
+    const boundingBoxes = useSelector(state => state.boundingBoxes)
+    const imageDimensions = useSelector(state => state.imageDimensions)
+    const imageName = useSelector(state => state.imageName)
 
     function downloadImageXML() {
         let xmltext =
         `
         <annotation>
             <size>
-                <width>${props.dimensions[1]}</width>
-                <height>${props.dimensions[0]}</height>
+                <width>${imageDimensions[1]}</width>
+                <height>${imageDimensions[0]}</height>
                 <depth>${depth}</depth>
             </size>
-            <object>
-                <name>${label}</name>
-                <bndbox>
-                    <xmin>${props.coords[0][0]}</xmin>
-                    <ymin>${props.coords[0][1]}</ymin>
-                    <xmax>${props.coords[1][0]}</xmax>
-                    <ymax>${props.coords[1][1]}</ymax>
-                </bndbox>
-            </object>
-        </annotation>
+            <name>${label}</name>
         `
 
-        let filename = props.imageName + crypto.randomUUID();
+        boundingBoxes.forEach(element => {
+            xmltext += 
+                `\n<object>
+                <bndbox>
+                    <xmin>${element[0][0]}</xmin>
+                    <ymin>${element[0][1]}</ymin>
+                    <xmax>${element[1][0]}</xmax>
+                    <ymax>${element[1][1]}</ymax>
+                </bndbox>
+            </object>`
+        })
+
+        xmltext += `\n</annotation>`
+
+        let filename = imageName + "-" + label + "-" + crypto.randomUUID();
         let pom = document.createElement('a');
         let bb = new Blob([xmltext], {type: 'text/plain'});
 
@@ -39,21 +51,27 @@ function LabelBar(props) {
         pom.click();
     }
 
+    useEffect(() => {
+        let tempLabelItems = []
+        boundingBoxes.forEach(element => {
+            let tempItem = <LabelBarItem boundingBox={element}></LabelBarItem>
+            tempLabelItems.push(tempItem)
+        });
+        setLabelItems(tempLabelItems)
+    }, [boundingBoxes])
+
     return <div id="LabelBarDiv">
-        {props.coords == null || props.coords.length == 0 || props.coords.length == 1
-            ? <></> :
+        {boundingBoxes.length >= 1 ?
             <div id="LabelBarContents">
-                <p id="BoundingCoordinatesTitle">Bounding Coordinates</p>
-                <p className = "CoordinateLabel">X1 Coordinate</p><input className = "CoordinateInput" value={props.coords[0][0]}></input>
-                <p className = "CoordinateLabel">y1 Coordinate</p><input className = "CoordinateInput" value={props.coords[0][1]}></input>
-                <p className = "CoordinateLabel">X2 Coordinate</p><input className = "CoordinateInput" value={props.coords[1][0]}></input>
-                <p className = "CoordinateLabel">Y2 Coordinate</p><input className = "CoordinateInput" value={props.coords[1][1]}></input>
-                <p className="CoordinateLabel">Enter a label</p><input onChange={(e) => setLabel(e.target.value)} className="CoordinateInput"></input>
-                <p className = "CoordinateLabel">Enter image depth</p><input onChange={(e) => setDepth(e.target.value)} className = "CoordinateInput"></input>
+                <p id="ActiveLabelHeader">Active Labels</p>
+                <div id="LabelBarTable">
+                    {labelItems}
+                </div>
+                <p className="CoordinateLabel">Enter a label</p><input onChange={(e) => setLabel(e.target.value)} className="LabelInput"></input>
+                <p className="CoordinateLabel">Enter image depth</p><input onChange={(e) => setDepth(e.target.value)} className="LabelInput"></input>
                 <button id="DownloadXMLButton" onClick={downloadImageXML}>Download XML Sheet For Image</button>
-            </div>
-        }
-    </div>
+            </div> : <></>}
+        </div>
 }
 
 export default LabelBar;

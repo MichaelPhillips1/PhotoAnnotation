@@ -1,9 +1,9 @@
 import DownloadIcon from '@mui/icons-material/Download';
 import ImageBarItem from './ImageBarItem';
 import React, { useRef, useState } from 'react';
+import store from './store';
 
-function ImageBar(props) {
-
+function ImageBar() {
     const [ImageBarItems, setImageBarItems] = useState([]);
     const fileInputRef = useRef(null);
 
@@ -21,9 +21,9 @@ function ImageBar(props) {
     }
 
     const imageClicked = (image, url) => {
-        props.setImagePath(url)
-        props.setCoords([])
-        props.setImageName(image)
+        store.dispatch({type: 'set/imagePath', payload: url})
+        store.dispatch({ type: 'clear/boundingBoxes' })
+        store.dispatch({type: 'set/imageName', payload: image})
     }
 
     return <div id="ImageBarDiv">
