@@ -6,7 +6,7 @@ body {
     monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(black, red);
+  background: linear-gradient(black, teal);
 }
 
 code {
@@ -116,7 +116,7 @@ code {
 #DisplayedImage{
   width: 95%;
   max-height: 95%;
-  border: 2px solid red;
+  border: 2px solid teal;
 }
 
 #LabelBarDiv{
