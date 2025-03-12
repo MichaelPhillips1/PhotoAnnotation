@@ -19,19 +19,17 @@ function LabelBar() {
         }
 
         let xmltext =
-        `
-        <annotation>
+        `<annotation>
             <size>
                 <width>${imageDimensions[1]}</width>
                 <height>${imageDimensions[0]}</height>
                 <depth>${depth}</depth>
             </size>
-            <name>${label.trim()}</name>
-        `
+            <name>${label.trim()}</name>`
 
         boundingBoxes.forEach(element => {
             xmltext += 
-                `\n<object>
+                `\n            <object>
                 <bndbox>
                     <xmin>${element[0][0]}</xmin>
                     <ymin>${element[0][1]}</ymin>
